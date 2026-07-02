@@ -1,0 +1,84 @@
+# Silicon Labs Project Configuration Tools: slcp, v0, Component selection file.
+project_name: btmesh2
+label: btmesh2
+description: |
+  Demonstrates the bare minimum needed for a Bluetooth Mesh C application. The application starts Unprovisioned Device Beaconing after booting, and then waits to be provisioned. This example runs on top of FreeRTOS.
+category: Bluetooth Mesh Examples
+filter:
+- name: Device Type
+  value: [SoC]
+- name: Project Difficulty
+  value: [Beginner]
+- name: Wireless Technology
+  value: [Bluetooth Mesh]
+package: Btmesh
+quality: production
+readme:
+- {path: readme_rtos.md}
+- {path: readme_rtos.md}
+source:
+- {path: app.c}
+- {path: app_freertos.c}
+tag: ['hardware:rf:band:2400', 'hardware:device:flash:512', 'hardware:device:ram:64']
+include:
+- path: .
+  file_list:
+  - {path: app.h}
+sdk: {id: simplicity_sdk, version: 2025.6.3}
+toolchain_settings: []
+component:
+- {id: EFR32MG24B210F1536IM48}
+- {id: app_assert}
+- {id: app_button_press}
+- {id: app_log}
+- {id: bootloader_interface}
+- {id: brd2703a_a02}
+- {id: bt_post_build}
+- {id: btmesh_factory_reset}
+- {id: btmesh_generic_base}
+- {id: btmesh_provisionee}
+- {id: btmesh_provisioning_decorator}
+- {id: btmesh_proxy}
+- {id: btmesh_sensor_client}
+- {id: btmesh_stack_gatt_prov_bearer}
+- {id: btmesh_stack_generic_client}
+- {id: btmesh_stack_relay}
+- {id: btmesh_stack_vendor_model}
+- {id: clock_manager}
+- {id: device_init}
+- {id: freertos}
+- instance: [qwiic]
+  id: i2cspm
+- {id: mpu}
+- {id: rail_util_pti}
+- {id: sensor_lux}
+- {id: sensor_rht}
+- instance: [btn0, btn1]
+  id: simple_button
+- instance: [led0, led1]
+  id: simple_led
+- {id: sl_main}
+other_file:
+- {path: readme_img0.png}
+- {path: readme_img1.png}
+- {path: readme_img2.png}
+- {path: readme_img3.png}
+- {path: readme_img4.png}
+- {path: readme_img5.png}
+configuration:
+- {name: EMDRV_DMADRV_DMA_CH_COUNT, value: '2'}
+- {name: NVM3_DEFAULT_NVM_SIZE, value: '0x6000'}
+- {name: SL_BTMESH_CONFIG_MAX_PROV_BEARERS, value: '3'}
+- condition: [psa_crypto]
+  name: SL_PSA_KEY_USER_SLOT_COUNT
+  value: '0'
+- {name: SL_BT_RTOS_HOST_STACK_TASK_STACK_SIZE, value: '4000'}
+- {name: SL_BTMESH_PROVISIONEE_AUTO_RESET_DELAY, value: '1'}
+ui_hints:
+  highlight:
+  - {path: config/btconf/gatt_configuration.btconf}
+  - {path: config/btmeshconf/dcd_config.btmeshconf}
+  - {path: readme.md, focus: true}
+post_build:
+- {path: btmesh2.slpb, profile: btmesh_common}
+

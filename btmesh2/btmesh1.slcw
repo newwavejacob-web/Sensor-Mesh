@@ -1,0 +1,7 @@
+---
+workspace_name: "btmesh1"
+label: "btmesh1"
+project:
+- id: "main"
+  path: "btmesh2.slcp"
+  output: "."

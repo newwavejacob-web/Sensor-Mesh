@@ -1,0 +1,14 @@
+{
+  "result_code": 0,
+  "result_message": "Generation successful",
+  "logs": [
+    {
+      "code": 0,
+      "type": "info",
+      "message": "Generation successful",
+      "description": "",
+      "traceback": []
+    }
+  ],
+  "validation_markers": []
+}
